@@ -19,7 +19,7 @@ method non_overlapping_intervals(intervals: array2<int>) returns (result: int)
     var end := intervals[0, 1];
     while (i < row)
         invariant 1 <= i <= row
-        invariant 1 <= count <= row
+        invariant 1 <= count <= i
         invariant intervals[0, 1] <= end <= intervals[row - 1, 1]
     {
         if (intervals[i, 0] >= end)
