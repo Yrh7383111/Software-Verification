@@ -20,7 +20,7 @@ method non_overlapping_intervals(intervals: array2<int>) returns (result: int)
     while (i < row)
         invariant 1 <= i <= row
         invariant 1 <= count <= i
-        invariant intervals[0, 1] <= end <= intervals[row - 1, 1]
+        invariant intervals[0, 1] <= end <= intervals[i - 1, 1]
     {
         if (intervals[i, 0] >= end)
         {
@@ -42,7 +42,7 @@ method bubble_sort(a: array2<int>)
     ensures sorted(a, 0, a.Length0 - 1)
 {
     var i := a.Length0 - 1;
-    while(i > 0)
+    while (i > 0)
         invariant i < 0 ==> a.Length0 == 0 // ask
         invariant sorted(a, i, a.Length0 - 1)
         invariant partitioned(a, i)
