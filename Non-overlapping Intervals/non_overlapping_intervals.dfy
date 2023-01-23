@@ -43,7 +43,7 @@ method bubble_sort(a: array2<int>)
 {
     var i := a.Length0 - 1;
     while (i > 0)
-        invariant i < 0 ==> a.Length0 == 0 // ask
+        invariant i < 0 ==> a.Length0 == 0
         invariant sorted(a, i, a.Length0 - 1)
         invariant partitioned(a, i)
     {
