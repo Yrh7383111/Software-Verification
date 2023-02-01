@@ -1,4 +1,4 @@
-method unique(s: seq<int>) returns (result: seq<int>) 
+method remove_duplicates_from_sorted_array(s: seq<int>) returns (result: seq<int>) 
     requires is_sorted(s)
     requires 1 <= |s| <= 30000
     requires forall i :: 0 <= i < |s| ==> -100 <= s[i] <= 100
