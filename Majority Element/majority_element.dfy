@@ -1,5 +1,6 @@
 method majority_element(nums: array<int>) returns (majorityElement: int)
     requires nums.Length > 0
+    // TODO:
     ensures count_occurrence(nums, 0, nums.Length - 1, majorityElement) > nums.Length / 2
 {
     var count := 0;

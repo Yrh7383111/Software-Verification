@@ -4,6 +4,7 @@ method non_overlapping_intervals(intervals: array2<int>) returns (result: int)
     requires intervals.Length1 == 2
     requires forall i :: 0 <= i < intervals.Length0 ==> -50000 <= intervals[i, 0] <= 50000
     requires forall i :: 0 <= i < intervals.Length0 ==> -50000 <= intervals[i, 1] <= 50000
+    // TODO: modify the ensures clause so that result is indeed equal to the minimum number of intervals we need to remove to make the rest of the intervals non-overlapping.
     ensures result >= 0
 {
     var row := intervals.Length0;
