@@ -1,5 +1,6 @@
 method majority_element(nums: array<int>) returns (majority: int)
     requires nums.Length > 0
+    requires exists element :: (count_occurrence(nums, 0, nums.Length - 1, element) > nums.Length / 2)
     // TODO:
     ensures count_occurrence(nums, 0, nums.Length - 1, majority) > nums.Length / 2
 {
@@ -10,7 +11,7 @@ method majority_element(nums: array<int>) returns (majority: int)
     while (i < nums.Length)
         invariant 0 <= i <= nums.Length
         invariant count >= 0
-        // invariant forall j :: 0 <= j < i ==> count_occurrence(nums, 0, j, majority) > (j + 1) / 2
+        invariant forall j :: 0 <= j < i ==> count_occurrence(nums, 0, j, majority) > (j + 1) / 2
         decreases nums.Length - i
     {
         var num := nums[i];
