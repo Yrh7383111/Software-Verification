@@ -1,8 +1,8 @@
-method longest_increasing_subsequence(nums: array<int>) returns (result: int)
+method longest_increasing_subsequence(nums: array<int>) returns (max: int)
     requires 1 <= nums.Length <= 2500
     requires forall i :: 0 <= i < nums.Length ==> -10000 <= nums[i] <= 10000
-    // TODO: modify the ensures clause so that result is indeed equal to the lowest increasing subsequence
-    ensures result >= 1
+    // TODO: modify the ensures clause so that max is indeed equal to the lowest increasing subsequence
+    ensures max >= 1
 {
     var length := nums.Length;
     if (length == 1)
@@ -10,7 +10,7 @@ method longest_increasing_subsequence(nums: array<int>) returns (result: int)
         return 1;
     }
 
-    var max := 1;
+    max := 1;
     var dp := new int[length](_ => 1);
 
     var i := 1;
@@ -34,8 +34,6 @@ method longest_increasing_subsequence(nums: array<int>) returns (result: int)
         max := find_max(max, dp[i]);
         i := i + 1;
     }
-
-    return max;
 }
 
 

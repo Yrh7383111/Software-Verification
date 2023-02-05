@@ -1,11 +1,11 @@
-method max_rotate_function(nums: array<int>) returns (result: int)
+method max_rotate_function(nums: array<int>) returns (max: int)
     requires 1 <= nums.Length <= 100000
     requires forall i :: 0 <= i < nums.Length ==> 0 <= nums[i] <= 100
-    ensures max_rotate_function_helper(nums, result, nums.Length)
+    ensures max_rotate_function_helper(nums, max, nums.Length)
 {
     var length := nums.Length;
 
-    var max := initialize_max(nums);
+    max := initialize_max(nums);
 
     var i := 0;
     while (i < length)
@@ -25,9 +25,6 @@ method max_rotate_function(nums: array<int>) returns (result: int)
         max := find_max(max, sum);
         i := i + 1;
     }
-
-
-    return max;
 }
 
 
@@ -59,13 +56,13 @@ function calculate_rotate_number(nums: array<int>, position: int, start: int, en
 
 
 // Helper methods
-method initialize_max(nums: array<int>) returns (result: int)
+method initialize_max(nums: array<int>) returns (max: int)
     requires 1 <= nums.Length <= 100000
     requires forall i :: 0 <= i < nums.Length ==> 0 <= nums[i] <= 100
-    ensures result == calculate_rotate_number(nums, 0, 0, nums.Length - 1)
+    ensures max == calculate_rotate_number(nums, 0, 0, nums.Length - 1)
 {
     var length := nums.Length;
-    var max := 0;
+    max := 0;
     var pre_max := 0;
 
     var i := 0;
@@ -78,6 +75,4 @@ method initialize_max(nums: array<int>) returns (result: int)
 
         i := i + 1;
     }
-
-    return max;
 }

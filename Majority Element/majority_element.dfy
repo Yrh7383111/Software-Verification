@@ -1,26 +1,26 @@
-method majority_element(nums: array<int>) returns (majorityElement: int)
+method majority_element(nums: array<int>) returns (majority: int)
     requires nums.Length > 0
     // TODO:
-    ensures count_occurrence(nums, 0, nums.Length - 1, majorityElement) > nums.Length / 2
+    ensures count_occurrence(nums, 0, nums.Length - 1, majority) > nums.Length / 2
 {
     var count := 0;
-    var candidate := nums[0];
+    majority := nums[0];
 
     var i := 0;
     while (i < nums.Length)
         invariant 0 <= i <= nums.Length
         invariant count >= 0
-        // invariant forall j :: 0 <= j < i ==> count_occurrence(nums, 0, j, candidate) > (j + 1) / 2
+        // invariant forall j :: 0 <= j < i ==> count_occurrence(nums, 0, j, majority) > (j + 1) / 2
         decreases nums.Length - i
     {
         var num := nums[i];
 
         if (count == 0)
         {
-            candidate := num;
+            majority := num;
         }
 
-        if (num == candidate)
+        if (num == majority)
         {
             count := count + 1;
         }
@@ -31,8 +31,6 @@ method majority_element(nums: array<int>) returns (majorityElement: int)
 
         i := i + 1;
     }
-
-    return candidate;
 }
 
 function count_occurrence(arr: array<int>, begin: int, end: int, element: int): int

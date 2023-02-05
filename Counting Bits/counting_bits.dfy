@@ -1,9 +1,9 @@
-method counting_bits(n: int) returns (arr: array<int>)
+method counting_bits(n: int) returns (result: array<int>)
     requires 0 <= n <= 100000
-    ensures arr.Length == n + 1
-    ensures forall i :: 1 <= i < n + 1 ==> arr[i] == arr[i / 2] + i % 2
+    ensures result.Length == n + 1
+    ensures forall i :: 1 <= i < n + 1 ==> result[i] == result[i / 2] + i % 2
 {
-    var result := new int[n + 1](i => 0);
+    result := new int[n + 1](i => 0);
 
     var i := 1;
     while (i < n + 1)
@@ -14,6 +14,4 @@ method counting_bits(n: int) returns (arr: array<int>)
 
         i := i + 1;
     }
-
-    return result;
 }

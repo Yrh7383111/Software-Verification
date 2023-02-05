@@ -1,11 +1,11 @@
-method non_overlapping_intervals(intervals: array2<int>) returns (result: int)
+method non_overlapping_intervals(intervals: array2<int>) returns (count: int)
     modifies intervals
     requires 1 <= intervals.Length0 <= 100000
     requires intervals.Length1 == 2
     requires forall i :: 0 <= i < intervals.Length0 ==> -50000 <= intervals[i, 0] <= 50000
     requires forall i :: 0 <= i < intervals.Length0 ==> -50000 <= intervals[i, 1] <= 50000
-    // TODO: modify the ensures clause so that result is indeed equal to the minimum number of intervals we need to remove to make the rest of the intervals non-overlapping.
-    ensures result >= 0
+    // TODO: modify the ensures clause so that count is indeed equal to the minimum number of intervals we need to remove to make the rest of the intervals non-overlapping.
+    ensures count >= 0
 {
     var row := intervals.Length0;
     if (row == 0)
@@ -16,7 +16,7 @@ method non_overlapping_intervals(intervals: array2<int>) returns (result: int)
     bubble_sort(intervals);
     
     var i := 1;
-    var count := 1;
+    count := 1;
     var end := intervals[0, 1];
     while (i < row)
         invariant 1 <= i <= row

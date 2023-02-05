@@ -16,5 +16,6 @@ method isPalindrome(s: array<char>) returns (result: bool)
 
         i := i + 1;
     }
+
     return true;
 }
