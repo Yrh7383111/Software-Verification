@@ -1,44 +1,27 @@
-method contains_duplicate(nums: array<int>) returns (s: set<int>)
+method contains_duplicate(nums: array<int>) returns (result: bool)
     requires 1 <= nums.Length <= 100000
     requires forall i :: 0 <= i < nums.Length ==> -1000000000 <= nums[i] <= 1000000000
-    ensures |s| == nums.Length ==> is_distinct(nums, 0, nums.Length)
-    ensures |s| != nums.Length  ==> exists i :: (0 <= i < nums.Length ==> count_occurrence(nums, 0, nums.Length - 1, nums[i]) >= 2)
+    ensures result == true ==> (exists i, j :: 0 <= i < j < nums.Length && nums[i] == nums[j])
+    ensures result == false ==> forall i, j :: 0 <= i < j < nums.Length ==> nums[i] != nums[j]
 {
-    s := {nums[0]};
-    var length := nums.Length;
-    
-    var i := 1;
-    while (i < length)
-        invariant 1 <= i <= length
-        invariant |s| <= i
-        invariant |s| == i ==> is_distinct(nums, 0, i)
-        invariant |s| < i ==> exists j :: (0 <= j < i ==> count_occurrence(nums, 0, j, nums[j]) >= 2)
+    var s := create_set_from_array(nums);
+    result := nums.Length != |s|;
+}
+
+method create_set_from_array(nums: array<int>) returns (s: set<int>)
+    ensures forall i :: i in s ==> (exists j :: 0 <= j < nums.Length && nums[j] == i)
+    ensures forall i, j :: i in s && j in s ==> i != j
+{
+    s := {};
+
+    var i := 0;
+    while (i < nums.Length)
+        invariant 0 <= i <= nums.Length
+        invariant forall j :: j in s ==> (exists k :: 0 <= k < i && nums[k] == j)
+        invariant forall j, k :: j in s && k in s ==> j != k
     {
         s := s + {nums[i]};
 
         i := i + 1;
-    }    
-}
-
-
-// Helper function
-function count_occurrence(nums: array<int>, begin: int, end: int, element: int): int
-    requires 0 <= begin <= nums.Length
-    requires 0 <= end <= nums.Length - 1
-    decreases end - begin
-    reads nums
-{
-    if begin > end then 0
-    else if nums[begin] == element then 1 + count_occurrence(nums, begin + 1, end, element)
-    else count_occurrence(nums, begin + 1, end, element)
-}
-
-
-// Helper predicate
-predicate is_distinct(nums: array<int>, begin: int, end: int)
-    requires 0 <= begin <= nums.Length
-    requires 0 <= end <= nums.Length
-    reads nums
-{
-    forall i, j :: begin <= i < j < end ==> nums[i] != nums[j]
+    }
 }
