@@ -9,7 +9,7 @@ method remove_duplicates_from_sorted_array(s: seq<int>) returns (result: seq<int
         result := [s[0]];
 
         var i := 1;
-        while i < |s|
+        while (i < |s|)
             invariant 0 <= i <= |s|
             invariant |result| >= 1;
             invariant previous in s[0..i];   
