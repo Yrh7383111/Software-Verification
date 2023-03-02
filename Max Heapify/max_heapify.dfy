@@ -1,46 +1,43 @@
 
-predicate maxHeaped(a: array<int>)
-    reads a;
+predicate is_max_heap(pq: array<int>)
+    reads pq;
 {
-    forall x :: (0 <= x < a.Length) ==> (
-        ((x*2 + 1 < a.Length) ==> (a[x] >= a[x*2 + 1])) && 
-        ((x*2 + 2 < a.Length) ==> (a[x] >= a[x*2 + 2]))
-    )
+    forall i :: 1 <= i < pq.Length ==> pq[(i - 1) / 2] >= pq[i]
 }
 
-method maxHeapify(arr: array<int>)
-    modifies arr;
-    requires arr.Length > 0;
-    ensures multiset(arr[..]) == multiset(old(arr[..]));
-    ensures maxHeaped(arr);
+method maxHeapify(pq: array<int>)
+    requires pq.Length > 0;
+    ensures is_max_heap(pq);
+    ensures multiset(pq[..]) == multiset(old(pq[..]));
+    modifies pq;
 {
     var i := 0;
-    while (i < arr.Length)
-        invariant 0 <= i <= arr.Length;
-        invariant multiset(arr[..]) == multiset(old(arr[..]));
-        invariant (0 <= i-1 < arr.Length) ==> (  // look after a sift.
-            ((i*2 + 1 < arr.Length) ==> (arr[i-1] >= arr[(i-1)*2 + 1])) && 
-            ((i*2 + 2 < arr.Length) ==> (arr[i-1] >= arr[(i-1)*2 + 2]))
+    while (i < pq.Length)
+        invariant 0 <= i <= pq.Length;
+        invariant multiset(pq[..]) == multiset(old(pq[..]));
+        invariant (0 <= i-1 < pq.Length) ==> (  // look after a sift.
+            ((i*2 + 1 < pq.Length) ==> (pq[i-1] >= pq[(i-1)*2 + 1])) && 
+            ((i*2 + 2 < pq.Length) ==> (pq[i-1] >= pq[(i-1)*2 + 2]))
         );
-        decreases arr.Length - i;
+        decreases pq.Length - i;
     {
         var left := 2 * i + 1;
         var right := 2 * i + 2;
 
         var largest:int;
-        if (left < arr.Length && arr[left] > arr[i]) {
+        if (left < pq.Length && pq[left] > pq[i]) {
             largest := left;
         } else {
             largest := i;
         }
 
-        if (right < arr.Length && arr[right] > arr[largest]) {
+        if (right < pq.Length && pq[right] > pq[largest]) {
             largest := right;
         }
 
         if (largest != i) {
-            arr[i], arr[largest] := arr[largest], arr[i];
-            maxHeapify(arr);
+            pq[i], pq[largest] := pq[largest], pq[i];
+            maxHeapify(pq);
         }
 
         i := i + 1;
