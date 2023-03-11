@@ -38,7 +38,7 @@ method longest_increasing_subsequence(nums: array<int>) returns (max: int)
 
 
 // Function
-function method find_max(x: int, y: int): int
+function find_max(x: int, y: int): int
 {
     if x > y then x
     else y
