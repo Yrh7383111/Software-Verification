@@ -11,7 +11,7 @@ class MinStack
     }
 
     method push(x: int)
-        modifies this;
+        modifies this
         ensures (stack == [x] + old(stack)) &&
                 (x == stack[0])
         ensures (|old(min_stack)| == 0 || x <= old(min_stack)[0]) ==> 
@@ -27,8 +27,8 @@ class MinStack
     }
 
     method pop() returns (x: int)
-        modifies this;
-        requires stack != [] && min_stack != [];
+        modifies this
+        requires stack != [] && min_stack != []
         ensures (stack == old(stack)[1..]) &&
                 (x == old(stack)[0])
         ensures (old(stack)[0] == old(min_stack)[0]) ==> 
