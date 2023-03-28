@@ -1,4 +1,4 @@
-def max_heapify(arr):
+def max_heapify(arr: list[int]) -> list[int]:
     n = len(arr)
     for i in range(n - 1, -1, -1):
         swim_up(arr, i)
