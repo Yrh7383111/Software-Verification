@@ -1,4 +1,4 @@
-def maxProfit(prices):
+def maxProfit(prices: list[int]) -> int:
     min_price = float('inf')
     max_profit = 0
     for price in prices:
