@@ -1,4 +1,4 @@
-def majority_element(nums):
+def majorityElement(nums: list[int]) -> int:
     count = 0
     candidate = None
     for num in nums:
@@ -8,6 +8,5 @@ def majority_element(nums):
     return candidate
 
 
-# Example usage:
 nums = [2, 2, 1, 1, 1, 2, 2]
-print(majority_element(nums)) # Output: 2 (2 appears more than half of the time)
+print(majorityElement(nums))
