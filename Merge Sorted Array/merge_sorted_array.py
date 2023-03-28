@@ -1,4 +1,4 @@
-def merge(self, nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]:
+def merge(nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]:
     i = 0
     j = 0
 
