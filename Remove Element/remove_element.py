@@ -1,4 +1,4 @@
-def removeElement(self, nums: list[int], val: int) -> int:
+def removeElement(nums: list[int], val: int) -> int:
     i = 0
     end = len(nums) - 1
 
