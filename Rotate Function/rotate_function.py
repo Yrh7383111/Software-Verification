@@ -1,4 +1,4 @@
-def maxRotateFunction(self, nums: list[int]) -> int:
+def maxRotateFunction(nums: list[int]) -> int:
     if not nums:
         return 0
     n = len(nums)
