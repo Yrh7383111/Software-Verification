@@ -1,6 +1,6 @@
 def removeDuplicates(nums: list[int]) -> list[int]:
     i = nums[0]
-    result = []
+    result = [i]
 
     for num in nums:
         if i != nums:
