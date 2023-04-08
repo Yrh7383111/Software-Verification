@@ -10,10 +10,10 @@ class Queue
 
     method enqueue(x: int)
         modifies this
-        ensures (queue == old(queue) + [x]) &&
-                (x == queue[|queue| - 1])
+        ensures (queue == [x] + old(queue)) &&
+                (x == queue[0])
     {
-        queue := queue + [x];
+        queue := [x] + queue;
     }
 
     method dequeue() returns (x: int)
